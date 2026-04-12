@@ -38,16 +38,19 @@ void main() {
       expect(s, contains('Token expired'));
     });
 
-    test('format is exactly: AuthException(statusCode: 401, errorCode: OAuthException, message: Token expired)', () {
-      final exception = AuthException(
-        statusCode: 401,
-        errorCode: 'OAuthException',
-        message: 'Token expired',
-      );
-      expect(
-        exception.toString(),
-        'AuthException(statusCode: 401, errorCode: OAuthException, message: Token expired)',
-      );
-    });
+    test(
+      'format is exactly: AuthException(statusCode: 401, errorCode: OAuthException, message: Token expired)',
+      () {
+        final exception = AuthException(
+          statusCode: 401,
+          errorCode: 'OAuthException',
+          message: 'Token expired',
+        );
+        expect(
+          exception.toString(),
+          'AuthException(statusCode: 401, errorCode: OAuthException, message: Token expired)',
+        );
+      },
+    );
   });
 }

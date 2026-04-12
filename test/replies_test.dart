@@ -7,9 +7,11 @@ import 'package:threads/src/replies.dart';
 import 'package:threads/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
-  return http.Response(jsonEncode(body), statusCode, headers: {
-    'content-type': 'application/json',
-  });
+  return http.Response(
+    jsonEncode(body),
+    statusCode,
+    headers: {'content-type': 'application/json'},
+  );
 }
 
 ThreadsHttpClient _mockClient(MockClient mock) {
@@ -28,10 +30,7 @@ void main() {
             {'id': 'reply-2'},
           ],
           'paging': {
-            'cursors': {
-              'before': 'before-cursor',
-              'after': 'after-cursor',
-            },
+            'cursors': {'before': 'before-cursor', 'after': 'after-cursor'},
           },
         });
       });
@@ -132,8 +131,7 @@ void main() {
 
       expect(capturedRequest.method, 'POST');
       expect(capturedRequest.url.path, '/v1.0/reply-123/manage_reply');
-      final body =
-          jsonDecode(capturedRequest.body) as Map<String, dynamic>;
+      final body = jsonDecode(capturedRequest.body) as Map<String, dynamic>;
       expect(body['hide'], 'true');
     });
 
@@ -147,8 +145,7 @@ void main() {
       final replies = Replies(_mockClient(mock));
       await replies.manageReply('reply-456', hide: false);
 
-      final body =
-          jsonDecode(capturedRequest.body) as Map<String, dynamic>;
+      final body = jsonDecode(capturedRequest.body) as Map<String, dynamic>;
       expect(body['hide'], 'false');
     });
   });
@@ -169,8 +166,7 @@ void main() {
         capturedRequest.url.path,
         '/v1.0/pending-123/manage_pending_reply',
       );
-      final body =
-          jsonDecode(capturedRequest.body) as Map<String, dynamic>;
+      final body = jsonDecode(capturedRequest.body) as Map<String, dynamic>;
       expect(body['approve'], 'true');
     });
 
@@ -184,8 +180,7 @@ void main() {
       final replies = Replies(_mockClient(mock));
       await replies.managePendingReply('pending-456', approve: false);
 
-      final body =
-          jsonDecode(capturedRequest.body) as Map<String, dynamic>;
+      final body = jsonDecode(capturedRequest.body) as Map<String, dynamic>;
       expect(body['approve'], 'false');
     });
   });

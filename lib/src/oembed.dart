@@ -11,10 +11,7 @@ class OEmbed {
       'url': url,
       'maxwidth': ?maxWidth?.toString(),
     };
-    final response = await _client.get(
-      '/oembed',
-      queryParams: queryParams,
-    );
+    final response = await _client.get('/oembed', queryParams: queryParams);
     return OEmbedResponse.fromJson(response);
   }
 }

@@ -68,7 +68,10 @@ void main() {
       expect(ReplyControl.everyone.value, 'everyone');
       expect(ReplyControl.accountsYouFollow.value, 'accounts_you_follow');
       expect(ReplyControl.mentionedOnly.value, 'mentioned_only');
-      expect(ReplyControl.parentPostAuthorOnly.value, 'parent_post_author_only');
+      expect(
+        ReplyControl.parentPostAuthorOnly.value,
+        'parent_post_author_only',
+      );
       expect(ReplyControl.followersOnly.value, 'followers_only');
     });
 
@@ -147,7 +150,10 @@ void main() {
 
   group('ContainerStatus', () {
     test('fromValue returns correct enum for known values', () {
-      expect(ContainerStatus.fromValue('IN_PROGRESS'), ContainerStatus.inProgress);
+      expect(
+        ContainerStatus.fromValue('IN_PROGRESS'),
+        ContainerStatus.inProgress,
+      );
       expect(ContainerStatus.fromValue('FINISHED'), ContainerStatus.finished);
       expect(ContainerStatus.fromValue('ERROR'), ContainerStatus.error);
       expect(ContainerStatus.fromValue('EXPIRED'), ContainerStatus.expired);

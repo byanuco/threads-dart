@@ -36,9 +36,7 @@ class User {
   }
 
   Future<UserProfile> getProfile(String userId, {List<String>? fields}) async {
-    final queryParams = <String, String>{
-      'fields': ?fields?.join(','),
-    };
+    final queryParams = <String, String>{'fields': ?fields?.join(',')};
     final response = await _client.get(
       '/$userId',
       queryParams: queryParams.isEmpty ? null : queryParams,
@@ -86,9 +84,7 @@ class User {
     String userId, {
     List<String>? fields,
   }) async {
-    final queryParams = <String, String>{
-      'fields': ?fields?.join(','),
-    };
+    final queryParams = <String, String>{'fields': ?fields?.join(',')};
     return _client.get(
       '/$userId/threads_publishing_limit',
       queryParams: queryParams.isEmpty ? null : queryParams,

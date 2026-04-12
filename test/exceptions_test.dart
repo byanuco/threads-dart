@@ -168,17 +168,20 @@ void main() {
       expect(e.toString(), contains('Invalid token'));
     });
 
-    test('toString format is exact SubtypeName(statusCode: N, errorCode: X, message: Y)', () {
-      final e = AuthException(
-        statusCode: 401,
-        errorCode: 'OAuthException',
-        message: 'Invalid token',
-      );
-      expect(
-        e.toString(),
-        'AuthException(statusCode: 401, errorCode: OAuthException, message: Invalid token)',
-      );
-    });
+    test(
+      'toString format is exact SubtypeName(statusCode: N, errorCode: X, message: Y)',
+      () {
+        final e = AuthException(
+          statusCode: 401,
+          errorCode: 'OAuthException',
+          message: 'Invalid token',
+        );
+        expect(
+          e.toString(),
+          'AuthException(statusCode: 401, errorCode: OAuthException, message: Invalid token)',
+        );
+      },
+    );
 
     test('RateLimitException toString format', () {
       final e = RateLimitException(

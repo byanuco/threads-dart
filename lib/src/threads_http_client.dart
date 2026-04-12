@@ -4,10 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:threads/src/exceptions/threads_exception.dart';
 
 class ThreadsHttpClient {
-  ThreadsHttpClient({
-    required this.accessToken,
-    http.Client? httpClient,
-  }) : _httpClient = httpClient ?? http.Client();
+  ThreadsHttpClient({required this.accessToken, http.Client? httpClient})
+    : _httpClient = httpClient ?? http.Client();
 
   static const _baseUrl = 'https://graph.threads.me/v1.0';
   final String accessToken;
@@ -69,35 +67,35 @@ class ThreadsHttpClient {
 
     throw switch (statusCode) {
       401 => AuthException(
-          statusCode: statusCode,
-          errorCode: errorCode,
-          message: message,
-        ),
+        statusCode: statusCode,
+        errorCode: errorCode,
+        message: message,
+      ),
       403 => PermissionException(
-          statusCode: statusCode,
-          errorCode: errorCode,
-          message: message,
-        ),
+        statusCode: statusCode,
+        errorCode: errorCode,
+        message: message,
+      ),
       404 => NotFoundException(
-          statusCode: statusCode,
-          errorCode: errorCode,
-          message: message,
-        ),
+        statusCode: statusCode,
+        errorCode: errorCode,
+        message: message,
+      ),
       429 => RateLimitException(
-          statusCode: statusCode,
-          errorCode: errorCode,
-          message: message,
-        ),
+        statusCode: statusCode,
+        errorCode: errorCode,
+        message: message,
+      ),
       400 => ValidationException(
-          statusCode: statusCode,
-          errorCode: errorCode,
-          message: message,
-        ),
+        statusCode: statusCode,
+        errorCode: errorCode,
+        message: message,
+      ),
       _ => UnknownException(
-          statusCode: statusCode,
-          errorCode: errorCode,
-          message: message,
-        ),
+        statusCode: statusCode,
+        errorCode: errorCode,
+        message: message,
+      ),
     };
   }
 }

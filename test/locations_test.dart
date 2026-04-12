@@ -7,9 +7,11 @@ import 'package:threads/src/locations.dart';
 import 'package:threads/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
-  return http.Response(jsonEncode(body), statusCode, headers: {
-    'content-type': 'application/json',
-  });
+  return http.Response(
+    jsonEncode(body),
+    statusCode,
+    headers: {'content-type': 'application/json'},
+  );
 }
 
 ThreadsHttpClient _mockClient(MockClient mock) {

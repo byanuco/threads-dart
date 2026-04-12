@@ -65,9 +65,7 @@ class Publishing {
     return response['id'] as String;
   }
 
-  Future<ContainerStatusResponse> getContainerStatus(
-    String containerId,
-  ) async {
+  Future<ContainerStatusResponse> getContainerStatus(String containerId) async {
     final response = await _client.get(
       '/$containerId',
       queryParams: {'fields': 'id,status,error_message'},

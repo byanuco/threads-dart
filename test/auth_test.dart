@@ -55,7 +55,10 @@ void main() {
       expect(uri.host, 'threads.net');
       expect(uri.path, '/oauth/authorize');
       expect(uri.queryParameters['client_id'], 'test-app-id');
-      expect(uri.queryParameters['redirect_uri'], 'https://example.com/callback');
+      expect(
+        uri.queryParameters['redirect_uri'],
+        'https://example.com/callback',
+      );
       expect(uri.queryParameters['response_type'], 'code');
       expect(
         uri.queryParameters['scope'],

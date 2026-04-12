@@ -10,9 +10,11 @@ import 'package:threads/src/publishing.dart';
 import 'package:threads/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
-  return http.Response(jsonEncode(body), statusCode, headers: {
-    'content-type': 'application/json',
-  });
+  return http.Response(
+    jsonEncode(body),
+    statusCode,
+    headers: {'content-type': 'application/json'},
+  );
 }
 
 ThreadsHttpClient _mockClient(MockClient mock) {
@@ -152,11 +154,13 @@ void main() {
     });
 
     test('includes error_message when present', () async {
-      final mock = MockClient((_) async => _jsonResponse({
-            'id': 'container-err',
-            'status': 'ERROR',
-            'error_message': 'Upload failed',
-          }));
+      final mock = MockClient(
+        (_) async => _jsonResponse({
+          'id': 'container-err',
+          'status': 'ERROR',
+          'error_message': 'Upload failed',
+        }),
+      );
 
       final publishing = Publishing(_mockClient(mock));
       final status = await publishing.getContainerStatus('container-err');

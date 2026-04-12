@@ -7,9 +7,11 @@ import 'package:threads/src/oembed.dart';
 import 'package:threads/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
-  return http.Response(jsonEncode(body), statusCode, headers: {
-    'content-type': 'application/json',
-  });
+  return http.Response(
+    jsonEncode(body),
+    statusCode,
+    headers: {'content-type': 'application/json'},
+  );
 }
 
 ThreadsHttpClient _mockClient(MockClient mock) {
@@ -64,7 +66,10 @@ void main() {
         maxWidth: 320,
       );
 
-      expect(capturedUri.queryParameters['url'], 'https://www.threads.net/@user/post/xyz');
+      expect(
+        capturedUri.queryParameters['url'],
+        'https://www.threads.net/@user/post/xyz',
+      );
       expect(capturedUri.queryParameters['maxwidth'], '320');
       expect(result.html, '<blockquote>small</blockquote>');
       expect(result.width, 320);

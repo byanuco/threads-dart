@@ -7,9 +7,11 @@ import 'package:threads/src/threads_http_client.dart';
 import 'package:threads/src/user.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
-  return http.Response(jsonEncode(body), statusCode, headers: {
-    'content-type': 'application/json',
-  });
+  return http.Response(
+    jsonEncode(body),
+    statusCode,
+    headers: {'content-type': 'application/json'},
+  );
 }
 
 ThreadsHttpClient _mockClient(MockClient mock) {
@@ -28,10 +30,7 @@ void main() {
             {'id': 'thread-2'},
           ],
           'paging': {
-            'cursors': {
-              'before': 'before-cursor',
-              'after': 'after-cursor',
-            },
+            'cursors': {'before': 'before-cursor', 'after': 'after-cursor'},
           },
         });
       });
@@ -92,7 +91,10 @@ void main() {
       });
 
       final user = User(_mockClient(mock));
-      final result = await user.getProfile('user-123', fields: ['id', 'username', 'name']);
+      final result = await user.getProfile(
+        'user-123',
+        fields: ['id', 'username', 'name'],
+      );
 
       expect(capturedUri.path, '/v1.0/user-123');
       expect(capturedUri.queryParameters['fields'], 'id,username,name');
@@ -122,10 +124,7 @@ void main() {
       late Uri capturedUri;
       final mock = MockClient((request) async {
         capturedUri = request.url;
-        return _jsonResponse({
-          'id': 'user-789',
-          'username': 'lookupuser',
-        });
+        return _jsonResponse({'id': 'user-789', 'username': 'lookupuser'});
       });
 
       final user = User(_mockClient(mock));
@@ -252,10 +251,7 @@ void main() {
       });
 
       final user = User(_mockClient(mock));
-      final result = await user.getMentions(
-        'user-123',
-        limit: 20,
-      );
+      final result = await user.getMentions('user-123', limit: 20);
 
       expect(capturedUri.path, '/v1.0/user-123/mentions');
       expect(capturedUri.queryParameters['limit'], '20');
@@ -275,10 +271,7 @@ void main() {
             {'id': 'ghost-2'},
           ],
           'paging': {
-            'cursors': {
-              'before': 'ghost-before',
-              'after': 'ghost-after',
-            },
+            'cursors': {'before': 'ghost-before', 'after': 'ghost-after'},
           },
         });
       });

@@ -18,14 +18,14 @@ class ThreadsClient {
     String? appId,
     String? appSecret,
     String? redirectUri,
-  })  : _appId = appId,
-        _appSecret = appSecret,
-        _redirectUri = redirectUri,
-        _rawHttpClient = httpClient,
-        _httpClient = ThreadsHttpClient(
-          accessToken: accessToken,
-          httpClient: httpClient,
-        );
+  }) : _appId = appId,
+       _appSecret = appSecret,
+       _redirectUri = redirectUri,
+       _rawHttpClient = httpClient,
+       _httpClient = ThreadsHttpClient(
+         accessToken: accessToken,
+         httpClient: httpClient,
+       );
 
   final String? _appId;
   final String? _appSecret;
@@ -48,7 +48,8 @@ class ThreadsClient {
       throw ValidationException(
         statusCode: 0,
         errorCode: 'MissingCredentials',
-        message: 'App credentials (appId, appSecret, redirectUri) are '
+        message:
+            'App credentials (appId, appSecret, redirectUri) are '
             'required for auth operations. Pass them to the '
             'ThreadsClient constructor or use Auth directly.',
       );

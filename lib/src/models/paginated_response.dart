@@ -1,9 +1,5 @@
 class PaginatedResponse<T> {
-  PaginatedResponse({
-    required this.data,
-    this.beforeCursor,
-    this.afterCursor,
-  });
+  PaginatedResponse({required this.data, this.beforeCursor, this.afterCursor});
 
   factory PaginatedResponse.fromJson(
     Map<String, dynamic> json,

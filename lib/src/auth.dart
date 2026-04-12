@@ -18,10 +18,7 @@ class Auth {
   final String redirectUri;
   final http.Client _httpClient;
 
-  Uri getAuthorizationUrl({
-    required List<Scope> scopes,
-    String? state,
-  }) {
+  Uri getAuthorizationUrl({required List<Scope> scopes, String? state}) {
     final params = <String, String?>{
       'client_id': appId,
       'redirect_uri': redirectUri,

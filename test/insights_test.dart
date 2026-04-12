@@ -8,9 +8,11 @@ import 'package:threads/src/insights.dart';
 import 'package:threads/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
-  return http.Response(jsonEncode(body), statusCode, headers: {
-    'content-type': 'application/json',
-  });
+  return http.Response(
+    jsonEncode(body),
+    statusCode,
+    headers: {'content-type': 'application/json'},
+  );
 }
 
 ThreadsHttpClient _mockClient(MockClient mock) {
@@ -134,11 +136,7 @@ void main() {
         capturedUri = request.url;
         return _jsonResponse({
           'data': [
-            {
-              'name': 'views',
-              'period': 'lifetime',
-              'values': <dynamic>[],
-            },
+            {'name': 'views', 'period': 'lifetime', 'values': <dynamic>[]},
           ],
         });
       });
@@ -159,21 +157,9 @@ void main() {
       final mock = MockClient((request) async {
         return _jsonResponse({
           'data': [
-            {
-              'name': 'views',
-              'period': 'day',
-              'values': <dynamic>[],
-            },
-            {
-              'name': 'likes',
-              'period': 'day',
-              'values': <dynamic>[],
-            },
-            {
-              'name': 'replies',
-              'period': 'day',
-              'values': <dynamic>[],
-            },
+            {'name': 'views', 'period': 'day', 'values': <dynamic>[]},
+            {'name': 'likes', 'period': 'day', 'values': <dynamic>[]},
+            {'name': 'replies', 'period': 'day', 'values': <dynamic>[]},
           ],
         });
       });
@@ -181,7 +167,11 @@ void main() {
       final insights = Insights(_mockClient(mock));
       final result = await insights.getUserInsights(
         'user-789',
-        metrics: [InsightMetric.views, InsightMetric.likes, InsightMetric.replies],
+        metrics: [
+          InsightMetric.views,
+          InsightMetric.likes,
+          InsightMetric.replies,
+        ],
       );
 
       expect(result.length, 3);

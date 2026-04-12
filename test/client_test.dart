@@ -42,18 +42,20 @@ void main() {
       expect(identical(first, second), isTrue);
     });
 
-    test('throws ValidationException when accessing auth without credentials',
-        () {
-      final client = ThreadsClient(accessToken: 'test-token');
-      expect(
-        () => client.auth,
-        throwsA(
-          isA<ValidationException>()
-              .having((e) => e.errorCode, 'errorCode', 'MissingCredentials')
-              .having((e) => e.statusCode, 'statusCode', 0),
-        ),
-      );
-    });
+    test(
+      'throws ValidationException when accessing auth without credentials',
+      () {
+        final client = ThreadsClient(accessToken: 'test-token');
+        expect(
+          () => client.auth,
+          throwsA(
+            isA<ValidationException>()
+                .having((e) => e.errorCode, 'errorCode', 'MissingCredentials')
+                .having((e) => e.statusCode, 'statusCode', 0),
+          ),
+        );
+      },
+    );
 
     test('throws ValidationException when only some credentials provided', () {
       final client = ThreadsClient(
@@ -61,10 +63,7 @@ void main() {
         appId: 'app-id',
         // missing appSecret and redirectUri
       );
-      expect(
-        () => client.auth,
-        throwsA(isA<ValidationException>()),
-      );
+      expect(() => client.auth, throwsA(isA<ValidationException>()));
     });
   });
 }

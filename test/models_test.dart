@@ -112,11 +112,7 @@ void main() {
     });
 
     test('toJson round-trips correctly', () {
-      final json = {
-        'id': 'media_123',
-        'media_type': 'TEXT',
-        'username': 'bob',
-      };
+      final json = {'id': 'media_123', 'media_type': 'TEXT', 'username': 'bob'};
       final obj = MediaObject.fromJson(json);
       final output = obj.toJson();
       expect(output['id'], 'media_123');
@@ -282,10 +278,7 @@ void main() {
           {'id': 'item_2'},
         ],
         'paging': {
-          'cursors': {
-            'before': 'cursor_before',
-            'after': 'cursor_after',
-          },
+          'cursors': {'before': 'cursor_before', 'after': 'cursor_after'},
         },
       };
       final response = PaginatedResponse.fromJson(

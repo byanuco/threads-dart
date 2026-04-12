@@ -7,9 +7,7 @@ class Locations {
   final ThreadsHttpClient _client;
 
   Future<Location> get(String locationId, {List<String>? fields}) async {
-    final queryParams = <String, String>{
-      'fields': ?fields?.join(','),
-    };
+    final queryParams = <String, String>{'fields': ?fields?.join(',')};
     final response = await _client.get(
       '/$locationId',
       queryParams: queryParams.isEmpty ? null : queryParams,

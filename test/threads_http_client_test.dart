@@ -7,9 +7,11 @@ import 'package:threads/src/exceptions/threads_exception.dart';
 import 'package:threads/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
-  return http.Response(jsonEncode(body), statusCode, headers: {
-    'content-type': 'application/json',
-  });
+  return http.Response(
+    jsonEncode(body),
+    statusCode,
+    headers: {'content-type': 'application/json'},
+  );
 }
 
 http.Response _errorResponse(
@@ -18,12 +20,9 @@ http.Response _errorResponse(
   String type = 'SomeError',
   int code = 100,
 }) {
-  return _jsonResponse(
-    {
-      'error': {'message': message, 'type': type, 'code': code},
-    },
-    statusCode: statusCode,
-  );
+  return _jsonResponse({
+    'error': {'message': message, 'type': type, 'code': code},
+  }, statusCode: statusCode);
 }
 
 void main() {
@@ -68,10 +67,7 @@ void main() {
         (_) async => _jsonResponse({'id': '42', 'name': 'Toad'}),
       );
 
-      final client = ThreadsHttpClient(
-        accessToken: 'tok',
-        httpClient: mock,
-      );
+      final client = ThreadsHttpClient(accessToken: 'tok', httpClient: mock);
       final result = await client.get('/me');
 
       expect(result['id'], '42');
@@ -101,14 +97,9 @@ void main() {
     });
 
     test('returns parsed JSON body', () async {
-      final mock = MockClient(
-        (_) async => _jsonResponse({'id': 'abc123'}),
-      );
+      final mock = MockClient((_) async => _jsonResponse({'id': 'abc123'}));
 
-      final client = ThreadsHttpClient(
-        accessToken: 'tok',
-        httpClient: mock,
-      );
+      final client = ThreadsHttpClient(accessToken: 'tok', httpClient: mock);
       final result = await client.post('/threads', body: {'text': 'Hi'});
 
       expect(result['id'], 'abc123');
@@ -148,10 +139,7 @@ void main() {
         ),
       );
 
-      final client = ThreadsHttpClient(
-        accessToken: 'tok',
-        httpClient: mock,
-      );
+      final client = ThreadsHttpClient(accessToken: 'tok', httpClient: mock);
 
       expect(
         () => client.get('/me'),
@@ -174,10 +162,7 @@ void main() {
         ),
       );
 
-      final client = ThreadsHttpClient(
-        accessToken: 'tok',
-        httpClient: mock,
-      );
+      final client = ThreadsHttpClient(accessToken: 'tok', httpClient: mock);
 
       expect(
         () => client.get('/me'),
@@ -204,10 +189,7 @@ void main() {
         ),
       );
 
-      final client = ThreadsHttpClient(
-        accessToken: 'tok',
-        httpClient: mock,
-      );
+      final client = ThreadsHttpClient(accessToken: 'tok', httpClient: mock);
 
       expect(
         () => client.get('/nonexistent'),
@@ -229,10 +211,7 @@ void main() {
         ),
       );
 
-      final client = ThreadsHttpClient(
-        accessToken: 'tok',
-        httpClient: mock,
-      );
+      final client = ThreadsHttpClient(accessToken: 'tok', httpClient: mock);
 
       expect(
         () => client.get('/restricted'),
@@ -254,10 +233,7 @@ void main() {
         ),
       );
 
-      final client = ThreadsHttpClient(
-        accessToken: 'tok',
-        httpClient: mock,
-      );
+      final client = ThreadsHttpClient(accessToken: 'tok', httpClient: mock);
 
       expect(
         () => client.get('/me'),
