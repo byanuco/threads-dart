@@ -1,39 +1,142 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# threads
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages). 
+[![CI](https://github.com/anuragdevanapally/threads/actions/workflows/ci.yml/badge.svg)](https://github.com/anuragdevanapally/threads/actions/workflows/ci.yml)
+[![pub.dev](https://img.shields.io/pub/v/threads.svg)](https://pub.dev/packages/threads)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages). 
--->
+A complete Dart SDK for the [Threads API](https://developers.facebook.com/docs/threads). Publish posts, manage replies, retrieve insights, handle OAuth, and more - all from a single package.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Installation
 
-## Features
+Add to your `pubspec.yaml`:
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  threads: ^0.1.0
 ```
 
-## Additional information
+Then run `dart pub get`.
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+## Quick start
+
+### Authentication
+
+The Threads API uses OAuth 2.0. Create an `Auth` instance and redirect your user to the authorization URL:
+
+```dart
+import 'package:threads/threads.dart';
+
+final auth = Auth(
+  appId: 'YOUR_APP_ID',
+  appSecret: 'YOUR_APP_SECRET',
+  redirectUri: 'https://your-app.example.com/callback',
+);
+
+final url = auth.getAuthorizationUrl(
+  scopes: [Scope.basic, Scope.publish, Scope.manageInsights],
+);
+// Redirect the user to `url`, then handle the callback.
+```
+
+After the user authorizes, exchange the code for tokens:
+
+```dart
+final shortLived = await auth.exchangeCode(codeFromCallback);
+final longLived = await auth.exchangeForLongLived(shortLived.accessToken);
+// Store longLived.accessToken - it's valid for 60 days.
+```
+
+### Publishing
+
+Once you have an access token, create a `ThreadsClient` and publish:
+
+```dart
+final client = ThreadsClient(accessToken: longLived.accessToken);
+
+// Step 1: create a container.
+final containerId = await client.publishing.createContainer(
+  userId: 'me',
+  mediaType: MediaType.text,
+  text: 'Hello from the Threads Dart SDK!',
+);
+
+// Step 2: publish it.
+final postId = await client.publishing.publish(
+  userId: 'me',
+  creationId: containerId,
+);
+```
+
+### Reading
+
+Fetch a user's threads with optional pagination:
+
+```dart
+final threads = await client.user.getThreads(
+  'me',
+  fields: ['id', 'text', 'timestamp'],
+  limit: 25,
+);
+
+for (final post in threads.data) {
+  print('${post.timestamp}: ${post.text}');
+}
+
+// Get the next page.
+if (threads.afterCursor != null) {
+  final next = await client.user.getThreads('me', after: threads.afterCursor);
+}
+```
+
+Fetch account-level and post-level insights:
+
+```dart
+final insights = await client.insights.getUserInsights(
+  'me',
+  metrics: [InsightMetric.views, InsightMetric.followersCount],
+);
+```
+
+### Error handling
+
+All errors thrown by this SDK are subclasses of `ThreadsException`, so you can catch them as broadly or narrowly as you need:
+
+```dart
+try {
+  await client.media.get(someId);
+} on NotFoundException catch (e) {
+  print('Not found: ${e.message}');
+} on RateLimitException catch (e) {
+  print('Rate limited - retry after a moment');
+} on PermissionException catch (e) {
+  print('Missing scope: ${e.errorCode}');
+} on ThreadsException catch (e) {
+  print('Threads error [${e.errorCode}]: ${e.message}');
+}
+```
+
+Every `ThreadsException` has three fields: `statusCode`, `errorCode`, and `message`.
+
+## API groups
+
+| Group | Access via | What it covers |
+|-------|-----------|----------------|
+| `Auth` | `client.auth` or standalone | OAuth flows, token exchange, token refresh |
+| `Publishing` | `client.publishing` | Create containers, publish posts, repost, delete |
+| `Media` | `client.media` | Fetch media objects, keyword search |
+| `Replies` | `client.replies` | Read and manage reply threads |
+| `User` | `client.user` | Profile, threads, replies, mentions, ghost posts |
+| `Insights` | `client.insights` | Media and account-level metrics |
+| `Locations` | `client.locations` | Tag posts with location data |
+| `OEmbed` | `client.oembed` | Embed Threads posts in web pages |
+| `Debug` | `client.debug` | Debug token info (useful in development) |
+
+A runnable end-to-end example lives in [`example/threads_example.dart`](example/threads_example.dart).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR expectations.
+
+## License
+
+MIT - see [LICENSE](LICENSE).

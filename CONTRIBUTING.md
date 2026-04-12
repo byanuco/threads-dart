@@ -1,0 +1,72 @@
+# Contributing
+
+Thanks for wanting to help. Here's everything you need to get up and running.
+
+## Development setup
+
+You'll need Dart 3.11 or later. Check with `dart --version`.
+
+```sh
+git clone https://github.com/anuragdevanapally/threads
+cd threads
+dart pub get
+```
+
+The generated JSON serialization files (`*.g.dart`) are checked in, but if you change any annotated model you'll need to regenerate them:
+
+```sh
+dart run build_runner build --delete-conflicting-outputs
+```
+
+## Running locally
+
+These are the commands worth knowing before you open a PR:
+
+```sh
+# Format
+dart format .
+
+# Analyze (zero warnings, zero infos)
+dart analyze --fatal-infos
+
+# Test
+dart test
+
+# Publish dry-run - catches anything pub.dev would reject
+dart pub publish --dry-run
+```
+
+All four should pass cleanly. CI runs the same set.
+
+## Testing approach
+
+Tests live in `test/`. We use `package:http`'s `MockClient` to intercept HTTP calls, so no real network access is needed. Tokens and IDs in tests are just dummy strings like `'test-token'` or `'12345'` - no real credentials.
+
+When adding a new feature:
+- Add a test that covers the happy path.
+- Add a test for at least one error case (e.g. a 4xx response producing the right exception subclass).
+- Keep test files parallel to the source files they cover (e.g. `test/publishing_test.dart` for `lib/src/publishing.dart`).
+
+## Code style
+
+- Follow the existing conventions - the linter will catch most things.
+- Public APIs get doc comments. Internal helpers don't need them.
+- Avoid abbreviations in names. `accessToken` not `tok`, `httpClient` not `client` (when there's ambiguity).
+- Enums expose a `value` string for the wire format and a `fromValue` factory for parsing responses. Keep that pattern when adding enums.
+- Models use `json_annotation` / `json_serializable`. Add `@JsonKey` for any field where the JSON key differs from the Dart name.
+
+## Branch strategy
+
+- Branch off `main`.
+- Name branches descriptively: `add-gif-support`, `fix-rate-limit-retry`, etc.
+- Open a PR against `main` when you're ready for review.
+- Squash or tidy your commits before asking for review - one logical change per commit is ideal, but a small sequence of clean commits is fine too.
+
+## PR expectations
+
+- The PR description should explain what changed and why, not just what the diff shows.
+- Link to any relevant Threads API docs if you're adding support for a new endpoint.
+- If you're changing public API surface, update the example and README to reflect it.
+- CI must be green before merge.
+
+If you're unsure whether something is in scope or have a question before starting, open an issue first - easier to align on direction early than after a big diff.
