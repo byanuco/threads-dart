@@ -1,0 +1,17 @@
+name: threads
+description: A complete Dart SDK for the Threads API. Publish posts, manage replies, retrieve insights, handle OAuth, and more.
+version: 0.1.0
+repository: https://github.com/anuragdevanapally/threads
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  http: ^1.4.0
+  json_annotation: ^4.9.0
+
+dev_dependencies:
+  build_runner: ^2.4.0
+  json_serializable: ^6.9.0
+  lints: ^6.0.0
+  test: ^1.25.0
