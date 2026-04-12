@@ -4,7 +4,7 @@
 [![pub.dev](https://img.shields.io/pub/v/threads.svg)](https://pub.dev/packages/threads)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A complete Dart SDK for the [Threads API](https://developers.facebook.com/docs/threads). Publish posts, manage replies, retrieve insights, handle OAuth, and more - all from a single package.
+A complete Dart SDK for the [Threads API](https://developers.facebook.com/docs/threads). Publish posts, manage replies, retrieve insights, and handle OAuth, all from a single package.
 
 ## Installation
 
@@ -43,7 +43,7 @@ After the user authorizes, exchange the code for tokens:
 ```dart
 final shortLived = await auth.exchangeCode(codeFromCallback);
 final longLived = await auth.exchangeForLongLived(shortLived.accessToken);
-// Store longLived.accessToken - it's valid for 60 days.
+// Store longLived.accessToken. It's valid for 60 days.
 ```
 
 ### Publishing
@@ -107,7 +107,7 @@ try {
 } on NotFoundException catch (e) {
   print('Not found: ${e.message}');
 } on RateLimitException catch (e) {
-  print('Rate limited - retry after a moment');
+  print('Rate limited. Retry after a moment.');
 } on PermissionException catch (e) {
   print('Missing scope: ${e.errorCode}');
 } on ThreadsException catch (e) {
@@ -139,4 +139,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR
 
 ## License
 
-MIT - see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).

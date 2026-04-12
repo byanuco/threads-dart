@@ -49,7 +49,7 @@ Future<void> main() async {
   const userId = 'ME'; // Use 'me' or a numeric user ID.
 
   // -------------------------------------------------------------------------
-  // Publishing - create and publish a text post
+  // Publishing: create and publish a text post
   // -------------------------------------------------------------------------
 
   // Step 1: create a media container.
@@ -68,7 +68,7 @@ Future<void> main() async {
   print('Post published: $postId');
 
   // -------------------------------------------------------------------------
-  // Reading - fetch the user's threads
+  // Reading: fetch the user's threads
   // -------------------------------------------------------------------------
 
   final threads = await client.user.getThreads(

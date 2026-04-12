@@ -32,7 +32,7 @@ dart analyze --fatal-infos
 # Test
 dart test
 
-# Publish dry-run - catches anything pub.dev would reject
+# Publish dry-run (catches anything pub.dev would reject)
 dart pub publish --dry-run
 ```
 
@@ -40,7 +40,7 @@ All four should pass cleanly. CI runs the same set.
 
 ## Testing approach
 
-Tests live in `test/`. We use `package:http`'s `MockClient` to intercept HTTP calls, so no real network access is needed. Tokens and IDs in tests are just dummy strings like `'test-token'` or `'12345'` - no real credentials.
+Tests live in `test/`. We use `package:http`'s `MockClient` to intercept HTTP calls, so no real network access is needed. Tokens and IDs in tests are just dummy strings like `'test-token'` or `'12345'`. No real credentials.
 
 When adding a new feature:
 - Add a test that covers the happy path.
@@ -49,7 +49,7 @@ When adding a new feature:
 
 ## Code style
 
-- Follow the existing conventions - the linter will catch most things.
+- Follow the existing conventions; the linter will catch most things.
 - Public APIs get doc comments. Internal helpers don't need them.
 - Avoid abbreviations in names. `accessToken` not `tok`, `httpClient` not `client` (when there's ambiguity).
 - Enums expose a `value` string for the wire format and a `fromValue` factory for parsing responses. Keep that pattern when adding enums.
@@ -60,7 +60,7 @@ When adding a new feature:
 - Branch off `main`.
 - Name branches descriptively: `add-gif-support`, `fix-rate-limit-retry`, etc.
 - Open a PR against `main` when you're ready for review.
-- Squash or tidy your commits before asking for review - one logical change per commit is ideal, but a small sequence of clean commits is fine too.
+- Squash or tidy your commits before asking for review. One logical change per commit is ideal, but a small sequence of clean commits is fine too.
 
 ## PR expectations
 
@@ -69,4 +69,4 @@ When adding a new feature:
 - If you're changing public API surface, update the example and README to reflect it.
 - CI must be green before merge.
 
-If you're unsure whether something is in scope or have a question before starting, open an issue first - easier to align on direction early than after a big diff.
+If you're unsure whether something is in scope or have a question before starting, open an issue first. Easier to align on direction early than after a big diff.
