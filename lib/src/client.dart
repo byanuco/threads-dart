@@ -1,10 +1,12 @@
 import 'package:http/http.dart' as http;
 import 'package:threads/src/auth.dart';
 import 'package:threads/src/exceptions/threads_exception.dart';
+import 'package:threads/src/insights.dart';
 import 'package:threads/src/media.dart';
 import 'package:threads/src/publishing.dart';
 import 'package:threads/src/replies.dart';
 import 'package:threads/src/threads_http_client.dart';
+import 'package:threads/src/user.dart';
 
 class ThreadsClient {
   ThreadsClient({
@@ -29,9 +31,11 @@ class ThreadsClient {
   final ThreadsHttpClient _httpClient;
 
   Auth? _auth;
+  Insights? _insights;
   Media? _media;
   Publishing? _publishing;
   Replies? _replies;
+  User? _user;
 
   Auth get auth {
     if (_appId == null || _appSecret == null || _redirectUri == null) {
@@ -51,9 +55,13 @@ class ThreadsClient {
     );
   }
 
+  Insights get insights => _insights ??= Insights(_httpClient);
+
   Media get media => _media ??= Media(_httpClient);
 
   Publishing get publishing => _publishing ??= Publishing(_httpClient);
 
   Replies get replies => _replies ??= Replies(_httpClient);
+
+  User get user => _user ??= User(_httpClient);
 }
