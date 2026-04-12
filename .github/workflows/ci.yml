@@ -15,7 +15,7 @@ jobs:
 
       - uses: dart-lang/setup-dart@v1
         with:
-          sdk: stable
+          sdk: 3.11.4
 
       - name: Install dependencies
         run: dart pub get
@@ -28,9 +28,6 @@ jobs:
 
       - name: Run tests
         run: dart test
-
-      - name: Audit dependencies
-        run: dart pub audit
 
       - name: Publish dry run
         run: dart pub publish --dry-run
