@@ -1,8 +1,11 @@
 import 'package:http/http.dart' as http;
 import 'package:threads/src/auth.dart';
+import 'package:threads/src/debug.dart';
 import 'package:threads/src/exceptions/threads_exception.dart';
 import 'package:threads/src/insights.dart';
+import 'package:threads/src/locations.dart';
 import 'package:threads/src/media.dart';
+import 'package:threads/src/oembed.dart';
 import 'package:threads/src/publishing.dart';
 import 'package:threads/src/replies.dart';
 import 'package:threads/src/threads_http_client.dart';
@@ -31,8 +34,11 @@ class ThreadsClient {
   final ThreadsHttpClient _httpClient;
 
   Auth? _auth;
+  Debug? _debug;
   Insights? _insights;
+  Locations? _locations;
   Media? _media;
+  OEmbed? _oembed;
   Publishing? _publishing;
   Replies? _replies;
   User? _user;
@@ -55,9 +61,15 @@ class ThreadsClient {
     );
   }
 
+  Debug get debug => _debug ??= Debug(_httpClient);
+
   Insights get insights => _insights ??= Insights(_httpClient);
 
+  Locations get locations => _locations ??= Locations(_httpClient);
+
   Media get media => _media ??= Media(_httpClient);
+
+  OEmbed get oembed => _oembed ??= OEmbed(_httpClient);
 
   Publishing get publishing => _publishing ??= Publishing(_httpClient);
 
