@@ -8,12 +8,16 @@ part of 'token.dart';
 
 Token _$TokenFromJson(Map<String, dynamic> json) => Token(
   accessToken: json['access_token'] as String,
-  tokenType: TokenType.fromValue(json['token_type'] as String),
-  expiresIn: (json['expires_in'] as num).toInt(),
+  tokenType: json['token_type'] == null
+      ? TokenType.bearer
+      : _tokenTypeFromJson(json['token_type'] as String?),
+  expiresIn: (json['expires_in'] as num?)?.toInt(),
+  userId: _userIdFromJson(json['user_id']),
 );
 
 Map<String, dynamic> _$TokenToJson(Token instance) => <String, dynamic>{
   'access_token': instance.accessToken,
   'token_type': _tokenTypeToJson(instance.tokenType),
   'expires_in': instance.expiresIn,
+  'user_id': instance.userId,
 };

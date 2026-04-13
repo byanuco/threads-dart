@@ -7,9 +7,11 @@ part 'media_object.g.dart';
 class MediaObject {
   MediaObject({
     required this.id,
+    this.mediaProductType,
     this.mediaType,
     this.mediaUrl,
     this.permalink,
+    this.owner,
     this.username,
     this.text,
     this.timestamp,
@@ -25,18 +27,24 @@ class MediaObject {
     this.repliedTo,
     this.hideStatus,
     this.replyAudience,
+    this.replyApprovalStatus,
     this.quotedPost,
     this.repostedPost,
     this.gifUrl,
     this.topicTag,
     this.altText,
     this.linkAttachmentUrl,
+    this.isVerified,
+    this.profilePictureUrl,
   });
 
   factory MediaObject.fromJson(Map<String, dynamic> json) =>
       _$MediaObjectFromJson(json);
 
   final String id;
+
+  @JsonKey(name: 'media_product_type')
+  final String? mediaProductType;
 
   @JsonKey(
     name: 'media_type',
@@ -49,6 +57,9 @@ class MediaObject {
   final String? mediaUrl;
 
   final String? permalink;
+
+  final Map<String, dynamic>? owner;
+
   final String? username;
   final String? text;
   final String? timestamp;
@@ -57,7 +68,7 @@ class MediaObject {
   @JsonKey(name: 'thumbnail_url')
   final String? thumbnailUrl;
 
-  final List<String>? children;
+  final List<Map<String, dynamic>>? children;
 
   @JsonKey(name: 'is_quote_post')
   final bool? isQuotePost;
@@ -86,6 +97,9 @@ class MediaObject {
   @JsonKey(name: 'reply_audience')
   final String? replyAudience;
 
+  @JsonKey(name: 'reply_approval_status')
+  final String? replyApprovalStatus;
+
   @JsonKey(name: 'quoted_post')
   final String? quotedPost;
 
@@ -103,6 +117,12 @@ class MediaObject {
 
   @JsonKey(name: 'link_attachment_url')
   final String? linkAttachmentUrl;
+
+  @JsonKey(name: 'is_verified')
+  final bool? isVerified;
+
+  @JsonKey(name: 'profile_picture_url')
+  final String? profilePictureUrl;
 
   Map<String, dynamic> toJson() => _$MediaObjectToJson(this);
 }

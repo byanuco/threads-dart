@@ -7,7 +7,9 @@ class InsightValue {
   InsightValue({
     required this.name,
     required this.period,
-    required this.values,
+    this.values = const [],
+    this.totalValue,
+    this.linkTotalValues,
     this.title,
     this.description,
     this.id,
@@ -19,6 +21,13 @@ class InsightValue {
   final String name;
   final String period;
   final List<Map<String, dynamic>> values;
+
+  @JsonKey(name: 'total_value')
+  final Map<String, dynamic>? totalValue;
+
+  @JsonKey(name: 'link_total_values')
+  final List<Map<String, dynamic>>? linkTotalValues;
+
   final String? title;
   final String? description;
   final String? id;

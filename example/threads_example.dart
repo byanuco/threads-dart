@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print, unused_local_variable
 
+import 'dart:io';
+
 import 'package:threads/threads.dart';
 
 Future<void> main() async {
@@ -7,11 +9,18 @@ Future<void> main() async {
   // Authentication
   // -------------------------------------------------------------------------
 
+  // Load credentials from .env file at the repo root.
+  final env = <String, String>{};
+  for (final line in File('.env').readAsLinesSync()) {
+    final idx = line.indexOf('=');
+    if (idx > 0) env[line.substring(0, idx)] = line.substring(idx + 1);
+  }
+
   // Create an Auth instance directly when you only need OAuth flows.
   final auth = Auth(
-    appId: 'YOUR_APP_ID',
-    appSecret: 'YOUR_APP_SECRET',
-    redirectUri: 'https://your-app.example.com/callback',
+    appId: env['THREADS_APP_ID']!,
+    appSecret: env['THREADS_APP_SECRET']!,
+    redirectUri: env['THREADS_REDIRECT_URI']!,
   );
 
   // Generate the URL to redirect the user to for authorization.
@@ -24,14 +33,20 @@ Future<void> main() async {
     ],
     state: 'some-csrf-token',
   );
-  print('Direct your user to: $authUrl');
 
-  // After the user authorizes and you receive the callback code, exchange it
-  // for a short-lived token, then upgrade to a long-lived one.
-  //
-  // final shortLived = await auth.exchangeCode('CODE_FROM_CALLBACK');
-  // final longLived = await auth.exchangeForLongLived(shortLived.accessToken);
-  // print('Long-lived token expires in: ${longLived.expiresIn} seconds');
+  // Open the authorization URL in the default browser.
+  print('Opening browser for authorization...');
+  await Process.run('open', [authUrl.toString()]);
+
+  // After authorizing, paste the full redirect URL or just the code.
+  stdout.write('Paste the redirect URL (or just the code): ');
+  final input = stdin.readLineSync()!;
+  final code = Uri.tryParse(input)?.queryParameters['code'] ?? input;
+
+  // Exchange it for a short-lived token, then upgrade to a long-lived one.
+  final shortLived = await auth.exchangeCode(code);
+  final longLived = await auth.exchangeForLongLived(shortLived.accessToken);
+  print('Long-lived token: $longLived');
 
   // -------------------------------------------------------------------------
   // ThreadsClient
@@ -40,13 +55,13 @@ Future<void> main() async {
   // ThreadsClient is the main entry point once you have an access token.
   // Pass appId/appSecret/redirectUri if you also want to call client.auth.
   final client = ThreadsClient(
-    accessToken: 'LONG_LIVED_ACCESS_TOKEN',
-    appId: 'YOUR_APP_ID',
-    appSecret: 'YOUR_APP_SECRET',
-    redirectUri: 'https://your-app.example.com/callback',
+    accessToken: longLived.accessToken,
+    appId: auth.appId,
+    appSecret: auth.appSecret,
+    redirectUri: auth.redirectUri,
   );
 
-  const userId = 'ME'; // Use 'me' or a numeric user ID.
+  const userId = 'me'; // Use 'me' or a numeric user ID.
 
   // -------------------------------------------------------------------------
   // Publishing: create and publish a text post
@@ -56,7 +71,7 @@ Future<void> main() async {
   final containerId = await client.publishing.createContainer(
     userId: userId,
     mediaType: MediaType.text,
-    text: 'Hello from the Threads Dart SDK!',
+    text: 'This post should delete itself shortly.',
   );
   print('Container created: $containerId');
 
@@ -113,7 +128,8 @@ Future<void> main() async {
   );
 
   for (final insight in userInsights) {
-    print('${insight.name}: ${insight.values.firstOrNull}');
+    final value = insight.totalValue ?? insight.values.firstOrNull;
+    print('${insight.name}: $value');
   }
 
   // -------------------------------------------------------------------------

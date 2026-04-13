@@ -7,7 +7,7 @@ class ThreadsHttpClient {
   ThreadsHttpClient({required this.accessToken, http.Client? httpClient})
     : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = 'https://graph.threads.me/v1.0';
+  static const _baseUrl = 'https://graph.threads.net/v1.0';
   final String accessToken;
   final http.Client _httpClient;
 
