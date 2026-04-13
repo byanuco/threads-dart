@@ -10,10 +10,9 @@ class Token {
     this.tokenType = TokenType.bearer,
     this.expiresIn,
     this.userId,
-  }) : expiresAt =
-           expiresIn != null
-               ? DateTime.now().add(Duration(seconds: expiresIn))
-               : null;
+  }) : expiresAt = expiresIn != null
+           ? DateTime.now().add(Duration(seconds: expiresIn))
+           : null;
 
   factory Token.fromJson(Map<String, dynamic> json) => _$TokenFromJson(json);
 
