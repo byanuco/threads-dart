@@ -40,7 +40,7 @@ void main() {
       );
       await client.get('/me');
 
-      expect(capturedUri.host, 'graph.threads.me');
+      expect(capturedUri.host, 'graph.threads.net');
       expect(capturedUri.path, '/v1.0/me');
       expect(capturedUri.queryParameters['access_token'], 'test-token');
     });

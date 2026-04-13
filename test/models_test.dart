@@ -33,11 +33,11 @@ void main() {
       final token = Token.fromJson(json);
       final after = DateTime.now();
       expect(
-        token.expiresAt.isAfter(before.add(const Duration(seconds: 3599))),
+        token.expiresAt!.isAfter(before.add(const Duration(seconds: 3599))),
         isTrue,
       );
       expect(
-        token.expiresAt.isBefore(after.add(const Duration(seconds: 3601))),
+        token.expiresAt!.isBefore(after.add(const Duration(seconds: 3601))),
         isTrue,
       );
     });
@@ -83,7 +83,10 @@ void main() {
         'timestamp': '2024-01-01T00:00:00Z',
         'shortcode': 'abc',
         'thumbnail_url': 'https://example.com/thumb.jpg',
-        'children': ['child_1', 'child_2'],
+        'children': [
+          {'id': 'child_1'},
+          {'id': 'child_2'},
+        ],
         'is_quote_post': true,
         'has_replies': false,
         'is_reply': false,
@@ -97,7 +100,10 @@ void main() {
       expect(obj.mediaUrl, 'https://example.com/img.jpg');
       expect(obj.username, 'alice');
       expect(obj.text, 'Hello world');
-      expect(obj.children, ['child_1', 'child_2']);
+      expect(obj.children, [
+        {'id': 'child_1'},
+        {'id': 'child_2'},
+      ]);
       expect(obj.isQuotePost, isTrue);
       expect(obj.altText, 'An image');
       expect(obj.linkAttachmentUrl, 'https://example.com');

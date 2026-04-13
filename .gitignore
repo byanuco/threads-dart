@@ -8,3 +8,6 @@ pubspec.lock
 
 # Scratch files used during development
 tmp/
+
+# Local credentials for running the example
+.env

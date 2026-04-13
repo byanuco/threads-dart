@@ -100,7 +100,7 @@ void main() {
       final token = await client.exchangeCode('auth-code-123');
 
       expect(capturedRequest.method, 'POST');
-      expect(capturedRequest.url.host, 'graph.threads.me');
+      expect(capturedRequest.url.host, 'graph.threads.net');
       expect(capturedRequest.url.path, '/oauth/access_token');
 
       final body = Uri.splitQueryString(capturedRequest.body);
@@ -153,7 +153,7 @@ void main() {
       final token = await client.exchangeForLongLived('short-lived-token');
 
       expect(capturedRequest.method, 'GET');
-      expect(capturedRequest.url.host, 'graph.threads.me');
+      expect(capturedRequest.url.host, 'graph.threads.net');
       expect(capturedRequest.url.path, '/access_token');
 
       final params = capturedRequest.url.queryParameters;
@@ -200,7 +200,7 @@ void main() {
       final token = await client.refreshLongLivedToken('long-lived-token');
 
       expect(capturedRequest.method, 'GET');
-      expect(capturedRequest.url.host, 'graph.threads.me');
+      expect(capturedRequest.url.host, 'graph.threads.net');
       expect(capturedRequest.url.path, '/refresh_access_token');
 
       final params = capturedRequest.url.queryParameters;

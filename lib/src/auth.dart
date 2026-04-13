@@ -30,7 +30,7 @@ class Auth {
   }
 
   Future<Token> exchangeCode(String code) async {
-    final uri = Uri.https('graph.threads.me', '/oauth/access_token');
+    final uri = Uri.https('graph.threads.net', '/oauth/access_token');
     final response = await _httpClient.post(
       uri,
       body: {
@@ -45,7 +45,7 @@ class Auth {
   }
 
   Future<Token> exchangeForLongLived(String shortLivedToken) async {
-    final uri = Uri.https('graph.threads.me', '/access_token', {
+    final uri = Uri.https('graph.threads.net', '/access_token', {
       'grant_type': 'th_exchange_token',
       'client_secret': appSecret,
       'access_token': shortLivedToken,
@@ -55,7 +55,7 @@ class Auth {
   }
 
   Future<Token> refreshLongLivedToken(String longLivedToken) async {
-    final uri = Uri.https('graph.threads.me', '/refresh_access_token', {
+    final uri = Uri.https('graph.threads.net', '/refresh_access_token', {
       'grant_type': 'th_refresh_token',
       'access_token': longLivedToken,
     });
@@ -70,11 +70,22 @@ class Auth {
       return Token.fromJson(body);
     }
 
-    final error = body['error'] as Map<String, dynamic>? ?? {};
-    final message = error['message'] as String? ?? 'Unknown error';
-    final errorType = error['type'] as String? ?? 'UnknownError';
-    final code = error['code'] as int? ?? 0;
-    final errorCode = '$errorType/$code';
+    // The token endpoints return flat error fields (error_message, error_type,
+    // code) rather than a nested "error" object used by the Graph API.
+    final String message;
+    final String errorCode;
+    if (body.containsKey('error')) {
+      final error = body['error'] as Map<String, dynamic>;
+      message = error['message'] as String? ?? 'Unknown error';
+      final errorType = error['type'] as String? ?? 'UnknownError';
+      final code = error['code'] as int? ?? 0;
+      errorCode = '$errorType/$code';
+    } else {
+      message = body['error_message'] as String? ?? 'Unknown error';
+      final errorType = body['error_type'] as String? ?? 'UnknownError';
+      final code = body['code'] as int? ?? 0;
+      errorCode = '$errorType/$code';
+    }
 
     throw AuthException(
       statusCode: response.statusCode,
