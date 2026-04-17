@@ -1,4 +1,6 @@
-## 0.1.1
+# CHANGELOG
+
+## [0.1.1] - 2026-04-12
 
 - Fix API base URL from `graph.threads.me` to `graph.threads.net`
 - Fix Token model to handle short-lived token responses (no `token_type` or `expires_in`)
@@ -11,7 +13,7 @@
 - Add `userId` field to `Token`
 - Make example interactive with browser-based OAuth and stdin code input
 
-## 0.1.0
+## [0.1.0] - 2026-04-11
 
 - Initial release
 - Full coverage of the Threads API: Publishing, Media Retrieval, Reply Management, User, Locations, Location Search, Insights, oEmbed, and Debug
