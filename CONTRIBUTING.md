@@ -7,7 +7,7 @@ Thanks for wanting to help. Here's everything you need to get up and running.
 You'll need Dart 3.11 or later. Check with `dart --version`.
 
 ```sh
-git clone https://github.com/anuragdevanapally/threads
+git clone https://github.com/andeart/threads
 cd threads
 dart pub get
 ```
