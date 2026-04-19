@@ -6,6 +6,8 @@
 
 A complete Dart SDK for the [Threads API](https://developers.facebook.com/docs/threads). Publish posts, manage replies, retrieve insights, and handle OAuth, all from a single package.
 
+> **Important.** This is a community-maintained package and is not affiliated with or endorsed by Meta or the Threads team. "Threads" is a trademark of Meta Platforms, Inc., mentioned here only so you know which API this package talks to.
+
 ## Installation
 
 Add to your `pubspec.yaml`:
