@@ -55,6 +55,13 @@ When adding a new feature:
 - Add a test for at least one error case (e.g. verify that a 4xx response from the API causes the SDK to throw the correct `ThreadsException` subclass).
 - Keep test files parallel to the source files they cover (e.g. `test/publishing_test.dart` for `lib/src/publishing.dart`).
 
+When fixing a bug:
+- First write a test that reproduces the bug and fails against `main`.
+- Then apply the fix, and confirm the same test now passes.
+- Include both the failing test and the fix in the same PR.
+
+Aim to cover every line of new code with tests. Anything uncovered tends to regress quietly, or get stripped out later by a "this doesn't look used" cleanup.
+
 ## Code style
 
 - Follow the existing conventions; the linter will catch most things.
