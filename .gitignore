@@ -9,5 +9,9 @@ pubspec.lock
 # Scratch files used during development
 tmp/
 
+# Design specs, plans, and other internal dev docs.
+# These are kept out of the published package and off the public repo page.
+docs/
+
 # Local credentials for running the example
 .env
