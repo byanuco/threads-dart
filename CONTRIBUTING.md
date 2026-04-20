@@ -44,16 +44,16 @@ Tests live in `test/`. We use `package:http`'s `MockClient` to intercept HTTP ca
 
 When adding a new feature:
 - Add a test that covers the happy path.
-- Add a test for at least one error case (e.g. a 4xx response producing the right exception subclass).
+- Add a test for at least one error case (e.g. verify that a 4xx response from the API causes the SDK to throw the correct `ThreadsException` subclass).
 - Keep test files parallel to the source files they cover (e.g. `test/publishing_test.dart` for `lib/src/publishing.dart`).
 
 ## Code style
 
 - Follow the existing conventions; the linter will catch most things.
-- Public APIs get doc comments. Internal helpers don't need them.
+- Public APIs get doc comments. Internal helpers don't currently need them.
 - Avoid abbreviations in names. `accessToken` not `tok`, `httpClient` not `client` (when there's ambiguity).
-- Enums expose a `value` string for the wire format and a `fromValue` factory for parsing responses. Keep that pattern when adding enums.
-- Models use `json_annotation` / `json_serializable`. Add `@JsonKey` for any field where the JSON key differs from the Dart name.
+- Enums expose a `value` string matching the literal string used in Threads API requests and responses, and a `fromValue` factory for parsing them back. Keep that pattern when adding enums.
+- Models use `json_annotation` / `json_serializable`. Add `@JsonKey` for any field where the JSON key differs from the Dart name. Don't hand-write your own `toJson` / `fromJson` methods, let the generator produce them.
 
 ## Branch strategy
 
