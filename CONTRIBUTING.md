@@ -76,6 +76,7 @@ Aim to cover every line of new code with tests. Anything uncovered tends to regr
 - Name branches descriptively: `add-gif-support`, `fix-rate-limit-retry`, etc.
 - Open a PR against `main` when you're ready for review.
 - Squash or tidy your commits before asking for review. One logical change per commit is ideal, but a small sequence of clean commits is fine too.
+- All commits must be cryptographically signed (GPG or SSH). GitHub will show a "Verified" badge next to each signed commit. Unsigned commits will not be merged. If you haven't set this up before, GitHub's [signing commits docs](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) cover both key generation and the git-side configuration.
 
 ## PR expectations
 
