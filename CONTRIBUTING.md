@@ -2,6 +2,14 @@
 
 Thanks for wanting to help. Here's everything you need to get up and running.
 
+## Before you start
+
+Open an issue before you open a PR. If an issue already covers what you want to do, link it. If not, file one first. You're welcome to open the PR at the same time if you're confident about the direction.
+
+The only exception is trivial changes, like fixing a typo, a broken link, or a wording tweak. Those can go straight to a PR.
+
+The reason we require an issue is that it's the durable record of the work. If a PR has to be reverted, we reopen the issue. If a contributor stops partway through, the issue is where we point so someone else can pick it up. Without an issue, the context vanishes the moment the PR closes.
+
 ## Development setup
 
 You'll need Dart 3.11 or later. Check with `dart --version`.
