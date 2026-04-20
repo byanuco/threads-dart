@@ -50,6 +50,8 @@ All four should pass cleanly. CI runs the same set.
 
 Tests live in `test/`. We use `package:http`'s `MockClient` to intercept HTTP calls, so no real network access is needed. Tokens and IDs in tests are just dummy strings like `'test-token'` or `'12345'`. No real credentials.
 
+Mock responses should mirror what the Threads API actually returns today: field names, shapes, status codes, error bodies. A test that passes against a made-up payload gives a false sense of safety. When adding or updating a mock, cross-reference the relevant endpoint in the [Threads API docs](https://developers.facebook.com/docs/threads) and check the [Threads API changelog](https://developers.facebook.com/docs/threads/changelog) for recent changes that might affect the shape you're mocking.
+
 When adding a new feature:
 - Add a test that covers the happy path.
 - Add a test for at least one error case (e.g. verify that a 4xx response from the API causes the SDK to throw the correct `ThreadsException` subclass).
