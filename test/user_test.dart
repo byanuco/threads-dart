@@ -227,11 +227,19 @@ void main() {
       final result = await user.getReplies(
         'user-123',
         fields: ['id'],
+        since: '2024-01-01',
+        until: '2024-12-31',
+        limit: 15,
+        before: 'b-cursor',
         after: 'a-cursor',
       );
 
       expect(capturedUri.path, '/v1.0/user-123/replies');
       expect(capturedUri.queryParameters['fields'], 'id');
+      expect(capturedUri.queryParameters['since'], '2024-01-01');
+      expect(capturedUri.queryParameters['until'], '2024-12-31');
+      expect(capturedUri.queryParameters['limit'], '15');
+      expect(capturedUri.queryParameters['before'], 'b-cursor');
       expect(capturedUri.queryParameters['after'], 'a-cursor');
       expect(result.data.length, 2);
       expect(result.data[0].id, 'reply-1');
@@ -251,10 +259,23 @@ void main() {
       });
 
       final user = User(_mockClient(mock));
-      final result = await user.getMentions('user-123', limit: 20);
+      final result = await user.getMentions(
+        'user-123',
+        fields: ['id', 'text'],
+        since: '2024-02-01',
+        until: '2024-11-30',
+        limit: 20,
+        before: 'b-cursor',
+        after: 'a-cursor',
+      );
 
       expect(capturedUri.path, '/v1.0/user-123/mentions');
+      expect(capturedUri.queryParameters['fields'], 'id,text');
+      expect(capturedUri.queryParameters['since'], '2024-02-01');
+      expect(capturedUri.queryParameters['until'], '2024-11-30');
       expect(capturedUri.queryParameters['limit'], '20');
+      expect(capturedUri.queryParameters['before'], 'b-cursor');
+      expect(capturedUri.queryParameters['after'], 'a-cursor');
       expect(result.data.length, 1);
       expect(result.data[0].id, 'mention-1');
     });
@@ -279,13 +300,21 @@ void main() {
       final user = User(_mockClient(mock));
       final result = await user.getGhostPosts(
         'user-123',
+        fields: ['id'],
         since: '2024-01-01',
+        until: '2024-12-31',
+        limit: 25,
         before: 'b-cursor',
+        after: 'a-cursor',
       );
 
       expect(capturedUri.path, '/v1.0/user-123/ghost_posts');
+      expect(capturedUri.queryParameters['fields'], 'id');
       expect(capturedUri.queryParameters['since'], '2024-01-01');
+      expect(capturedUri.queryParameters['until'], '2024-12-31');
+      expect(capturedUri.queryParameters['limit'], '25');
       expect(capturedUri.queryParameters['before'], 'b-cursor');
+      expect(capturedUri.queryParameters['after'], 'a-cursor');
       expect(result.data.length, 2);
       expect(result.beforeCursor, 'ghost-before');
       expect(result.afterCursor, 'ghost-after');

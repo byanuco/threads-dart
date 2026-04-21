@@ -87,10 +87,17 @@ void main() {
       final result = await replies.getConversation(
         'media-789',
         fields: ['id', 'text'],
+        reverse: false,
+        before: 'b-cursor',
+        after: 'a-cursor',
       );
 
       expect(capturedUri.path, '/v1.0/media-789/conversation');
-      expect(capturedUri.queryParameters['fields'], 'id,text');
+      final params = capturedUri.queryParameters;
+      expect(params['fields'], 'id,text');
+      expect(params['reverse'], 'false');
+      expect(params['before'], 'b-cursor');
+      expect(params['after'], 'a-cursor');
       expect(result.data.length, 1);
       expect(result.data[0].id, 'conv-1');
     });
@@ -110,9 +117,20 @@ void main() {
       });
 
       final replies = Replies(_mockClient(mock));
-      final result = await replies.getPendingReplies('media-abc');
+      final result = await replies.getPendingReplies(
+        'media-abc',
+        fields: ['id'],
+        reverse: true,
+        before: 'b-cursor',
+        after: 'a-cursor',
+      );
 
       expect(capturedUri.path, '/v1.0/media-abc/pending_replies');
+      final params = capturedUri.queryParameters;
+      expect(params['fields'], 'id');
+      expect(params['reverse'], 'true');
+      expect(params['before'], 'b-cursor');
+      expect(params['after'], 'a-cursor');
       expect(result.data.length, 2);
       expect(result.data[0].id, 'pending-1');
     });
