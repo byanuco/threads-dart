@@ -64,6 +64,24 @@ When fixing a bug:
 
 Aim to cover every line of new code with tests. Anything uncovered tends to regress quietly, or get stripped out later by a "this doesn't look used" cleanup.
 
+## Coverage
+
+We hold total line coverage at 90% or higher. CI runs the suite with coverage and fails the build if the number drops below that, so a PR that removes a test without replacing it, or adds a branch with no test, will be caught before merge.
+
+To run the same check locally:
+
+```sh
+# Run the suite and write coverage/lcov.info.
+dart run coverage:test_with_coverage
+
+# Check the total line coverage against the 90% floor.
+dart run tool/check_coverage.dart --min-coverage 90
+```
+
+Generated files (`*.g.dart`) are excluded from the calculation since build_runner owns them. Everything under `lib/src/` counts.
+
+The 90% bar is a floor, not a target. New changes are expected to keep coverage where it is, or raise it. If you're adding code that's genuinely hard to exercise from tests, flag it in the PR so we can talk about the right shape rather than quietly lowering the threshold.
+
 ## Code style
 
 - Follow the existing conventions; the linter will catch most things.

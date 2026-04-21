@@ -1,8 +1,15 @@
 import 'package:test/test.dart';
 import 'package:threads/src/auth.dart';
 import 'package:threads/src/client.dart';
+import 'package:threads/src/debug.dart';
 import 'package:threads/src/exceptions/threads_exception.dart';
+import 'package:threads/src/insights.dart';
+import 'package:threads/src/locations.dart';
+import 'package:threads/src/media.dart';
+import 'package:threads/src/oembed.dart';
 import 'package:threads/src/publishing.dart';
+import 'package:threads/src/replies.dart';
+import 'package:threads/src/user.dart';
 
 void main() {
   group('ThreadsClient.publishing', () {
@@ -16,6 +23,33 @@ void main() {
       final first = client.publishing;
       final second = client.publishing;
       expect(identical(first, second), isTrue);
+    });
+  });
+
+  group('ThreadsClient sub-group getters', () {
+    test('exposes each sub-group and caches the instance', () {
+      final client = ThreadsClient(accessToken: 'test-token');
+
+      expect(client.debug, isA<Debug>());
+      expect(identical(client.debug, client.debug), isTrue);
+
+      expect(client.insights, isA<Insights>());
+      expect(identical(client.insights, client.insights), isTrue);
+
+      expect(client.locations, isA<Locations>());
+      expect(identical(client.locations, client.locations), isTrue);
+
+      expect(client.media, isA<Media>());
+      expect(identical(client.media, client.media), isTrue);
+
+      expect(client.oembed, isA<OEmbed>());
+      expect(identical(client.oembed, client.oembed), isTrue);
+
+      expect(client.replies, isA<Replies>());
+      expect(identical(client.replies, client.replies), isTrue);
+
+      expect(client.user, isA<User>());
+      expect(identical(client.user, client.user), isTrue);
     });
   });
 

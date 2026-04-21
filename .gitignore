@@ -15,3 +15,6 @@ docs/
 
 # Local credentials for running the example
 .env
+
+# Test coverage output
+coverage/

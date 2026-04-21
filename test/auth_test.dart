@@ -133,6 +133,70 @@ void main() {
         ),
       );
     });
+
+    test('parses flat error_message/error_type/code error body', () async {
+      final mock = MockClient(
+        (_) async => http.Response(
+          jsonEncode({
+            'error_message': 'Authorization code has expired',
+            'error_type': 'OAuthException',
+            'code': 100,
+          }),
+          400,
+          headers: {'content-type': 'application/json'},
+        ),
+      );
+
+      final client = Auth(
+        appId: 'app-id',
+        appSecret: 'app-secret',
+        redirectUri: 'https://example.com/callback',
+        httpClient: mock,
+      );
+
+      expect(
+        () => client.exchangeCode('expired-code'),
+        throwsA(
+          isA<AuthException>()
+              .having((e) => e.statusCode, 'statusCode', 400)
+              .having(
+                (e) => e.message,
+                'message',
+                'Authorization code has expired',
+              )
+              .having((e) => e.errorCode, 'errorCode', 'OAuthException/100'),
+        ),
+      );
+    });
+
+    test(
+      'falls back to defaults when flat error body is missing fields',
+      () async {
+        final mock = MockClient(
+          (_) async => http.Response(
+            jsonEncode(<String, dynamic>{}),
+            500,
+            headers: {'content-type': 'application/json'},
+          ),
+        );
+
+        final client = Auth(
+          appId: 'app-id',
+          appSecret: 'app-secret',
+          redirectUri: 'https://example.com/callback',
+          httpClient: mock,
+        );
+
+        expect(
+          () => client.exchangeCode('weird-code'),
+          throwsA(
+            isA<AuthException>()
+                .having((e) => e.message, 'message', 'Unknown error')
+                .having((e) => e.errorCode, 'errorCode', 'UnknownError/0'),
+          ),
+        );
+      },
+    );
   });
 
   group('Auth.exchangeForLongLived', () {

@@ -26,8 +26,11 @@ jobs:
       - name: Analyze
         run: dart analyze --fatal-infos
 
-      - name: Run tests
-        run: dart test
+      - name: Run tests with coverage
+        run: dart run coverage:test_with_coverage
+
+      - name: Check coverage threshold
+        run: dart run tool/check_coverage.dart --min-coverage 90
 
       - name: Publish dry run
         run: dart pub publish --dry-run

@@ -87,6 +87,45 @@ void main() {
       expect(id, 'img-container-789');
     });
 
+    test('includes every optional field when provided', () async {
+      late http.Request capturedRequest;
+      final mock = MockClient((request) async {
+        capturedRequest = request;
+        return _jsonResponse({'id': 'carousel-1'});
+      });
+
+      final publishing = Publishing(_mockClient(mock));
+      await publishing.createContainer(
+        userId: 'user-5',
+        mediaType: MediaType.carousel,
+        text: 'All fields',
+        imageUrl: 'https://example.com/a.jpg',
+        videoUrl: 'https://example.com/a.mp4',
+        isCarouselItem: true,
+        children: ['child-1', 'child-2'],
+        replyToId: 'reply-target',
+        replyControl: ReplyControl.mentionedOnly,
+        altText: 'Alt text',
+        linkAttachment: 'https://example.com',
+        quotePostId: 'quote-id',
+        topicTag: 'launch',
+      );
+
+      final body = jsonDecode(capturedRequest.body) as Map<String, dynamic>;
+      expect(body['media_type'], 'CAROUSEL');
+      expect(body['text'], 'All fields');
+      expect(body['image_url'], 'https://example.com/a.jpg');
+      expect(body['video_url'], 'https://example.com/a.mp4');
+      expect(body['is_carousel_item'], true);
+      expect(body['children'], ['child-1', 'child-2']);
+      expect(body['reply_to_id'], 'reply-target');
+      expect(body['reply_control'], 'mentioned_only');
+      expect(body['alt_text'], 'Alt text');
+      expect(body['link_attachment'], 'https://example.com');
+      expect(body['quote_post_id'], 'quote-id');
+      expect(body['topic_tag'], 'launch');
+    });
+
     test('omits null fields from request body', () async {
       late http.Request capturedRequest;
       final mock = MockClient((request) async {

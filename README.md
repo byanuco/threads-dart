@@ -139,6 +139,8 @@ A runnable end-to-end example lives in [`example/threads_example.dart`](example/
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR expectations.
 
+Test coverage is held at 90% or higher, enforced in CI. See the [Coverage section in CONTRIBUTING.md](CONTRIBUTING.md#coverage) for how to run the check locally.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

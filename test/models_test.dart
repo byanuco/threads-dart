@@ -218,6 +218,19 @@ void main() {
       expect(insight.description, isNull);
       expect(insight.id, isNull);
     });
+
+    test('toJson round-trips correctly', () {
+      final json = {
+        'name': 'views',
+        'period': 'lifetime',
+        'values': <Map<String, dynamic>>[],
+        'title': 'Views',
+      };
+      final output = InsightValue.fromJson(json).toJson();
+      expect(output['name'], 'views');
+      expect(output['period'], 'lifetime');
+      expect(output['title'], 'Views');
+    });
   });
 
   group('Location', () {
@@ -247,6 +260,18 @@ void main() {
       expect(loc.latitude, isNull);
       expect(loc.postalCode, isNull);
     });
+
+    test('toJson round-trips correctly', () {
+      final json = {
+        'id': 'loc_123',
+        'name': 'Central Park',
+        'postal_code': '10024',
+      };
+      final output = Location.fromJson(json).toJson();
+      expect(output['id'], 'loc_123');
+      expect(output['name'], 'Central Park');
+      expect(output['postal_code'], '10024');
+    });
   });
 
   group('OEmbedResponse', () {
@@ -273,6 +298,18 @@ void main() {
       final resp = OEmbedResponse.fromJson(json);
       expect(resp.providerName, isNull);
       expect(resp.width, isNull);
+    });
+
+    test('toJson round-trips correctly', () {
+      final json = {
+        'html': '<blockquote>...</blockquote>',
+        'provider_name': 'Threads',
+        'width': 550,
+      };
+      final output = OEmbedResponse.fromJson(json).toJson();
+      expect(output['html'], '<blockquote>...</blockquote>');
+      expect(output['provider_name'], 'Threads');
+      expect(output['width'], 550);
     });
   });
 
