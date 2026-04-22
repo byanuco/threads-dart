@@ -1,6 +1,6 @@
 # threads
 
-[![CI](https://github.com/andeart/threads-dart/actions/workflows/ci.yml/badge.svg)](https://github.com/andeart/threads-dart/actions/workflows/ci.yml)
+[![CI](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml/badge.svg)](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml)
 [![pub.dev](https://img.shields.io/pub/v/threads.svg)](https://pub.dev/packages/threads)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 

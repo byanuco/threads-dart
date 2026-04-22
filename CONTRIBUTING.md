@@ -15,8 +15,8 @@ The reason we require an issue is that it's the durable record of the work. If a
 You'll need Dart 3.11 or later. Check with `dart --version`.
 
 ```sh
-git clone https://github.com/andeart/threads
-cd threads
+git clone https://github.com/byanuco/threads-dart
+cd threads-dart
 dart pub get
 ```
 
