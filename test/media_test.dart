@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
-import 'package:threads/src/enums/media_type.dart' as enums;
-import 'package:threads/src/enums/search_mode.dart';
-import 'package:threads/src/enums/search_type.dart';
-import 'package:threads/src/media.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/enums/media_type.dart' as enums;
+import 'package:threads_sdk/src/enums/search_mode.dart';
+import 'package:threads_sdk/src/enums/search_type.dart';
+import 'package:threads_sdk/src/media.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
   return http.Response(

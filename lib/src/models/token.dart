@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:threads/src/enums/token_type.dart';
+import 'package:threads_sdk/src/enums/token_type.dart';
 
 part 'token.g.dart';
 

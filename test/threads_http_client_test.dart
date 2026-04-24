@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
-import 'package:threads/src/exceptions/threads_exception.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/exceptions/threads_exception.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
   return http.Response(

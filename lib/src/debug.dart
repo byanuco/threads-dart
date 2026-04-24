@@ -1,4 +1,4 @@
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class Debug {
   Debug(this._client);

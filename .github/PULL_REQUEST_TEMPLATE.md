@@ -23,4 +23,4 @@ Closes #
 - [ ] Mock responses mirror what the real [Threads API](https://developers.facebook.com/docs/threads) returns today (field names, shapes, status codes, error bodies), cross-referenced against the [Threads API changelog](https://developers.facebook.com/docs/threads/changelog). See [Testing approach](/CONTRIBUTING.md#testing-approach).
 - [ ] Every commit is cryptographically signed and shows GitHub's "Verified" badge. See [Branch strategy](/CONTRIBUTING.md#branch-strategy).
 - [ ] `dart format .`, `dart analyze --fatal-infos`, `dart test`, and `dart pub publish --dry-run` all pass locally. See [Running locally](/CONTRIBUTING.md#running-locally).
-- [ ] If public API surface changed, the [example](/example/threads_example.dart) and [API groups](/README.md#api-groups) section of the README are updated to match. See [PR expectations](/CONTRIBUTING.md#pr-expectations).
+- [ ] If public API surface changed, the [example](/example/threads_sdk_example.dart) and [API groups](/README.md#api-groups) section of the README are updated to match. See [PR expectations](/CONTRIBUTING.md#pr-expectations).

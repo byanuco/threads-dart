@@ -1,5 +1,5 @@
-import 'package:threads/src/models/location.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/models/location.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class Locations {
   Locations(this._client);

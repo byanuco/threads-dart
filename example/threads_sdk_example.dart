@@ -1,8 +1,8 @@
-// ignore_for_file: avoid_print, unused_local_variable
+// ignore_for_file: avoid_print
 
 import 'dart:io';
 
-import 'package:threads/threads.dart';
+import 'package:threads_sdk/threads_sdk.dart';
 
 Future<void> main() async {
   // -------------------------------------------------------------------------

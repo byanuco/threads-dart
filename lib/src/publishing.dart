@@ -1,7 +1,7 @@
-import 'package:threads/src/enums/container_status.dart';
-import 'package:threads/src/enums/media_type.dart';
-import 'package:threads/src/enums/reply_control.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/enums/container_status.dart';
+import 'package:threads_sdk/src/enums/media_type.dart';
+import 'package:threads_sdk/src/enums/reply_control.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class ContainerStatusResponse {
   ContainerStatusResponse({

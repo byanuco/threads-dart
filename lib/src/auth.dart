@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:threads/src/enums/scope.dart';
-import 'package:threads/src/exceptions/threads_exception.dart';
-import 'package:threads/src/models/token.dart';
+import 'package:threads_sdk/src/enums/scope.dart';
+import 'package:threads_sdk/src/exceptions/threads_exception.dart';
+import 'package:threads_sdk/src/models/token.dart';
 
 class Auth {
   Auth({

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:threads/src/enums/media_type.dart';
+import 'package:threads_sdk/src/enums/media_type.dart';
 
 part 'media_object.g.dart';
 

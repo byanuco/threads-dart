@@ -1,15 +1,15 @@
 import 'package:test/test.dart';
-import 'package:threads/src/auth.dart';
-import 'package:threads/src/client.dart';
-import 'package:threads/src/debug.dart';
-import 'package:threads/src/exceptions/threads_exception.dart';
-import 'package:threads/src/insights.dart';
-import 'package:threads/src/locations.dart';
-import 'package:threads/src/media.dart';
-import 'package:threads/src/oembed.dart';
-import 'package:threads/src/publishing.dart';
-import 'package:threads/src/replies.dart';
-import 'package:threads/src/user.dart';
+import 'package:threads_sdk/src/auth.dart';
+import 'package:threads_sdk/src/client.dart';
+import 'package:threads_sdk/src/debug.dart';
+import 'package:threads_sdk/src/exceptions/threads_exception.dart';
+import 'package:threads_sdk/src/insights.dart';
+import 'package:threads_sdk/src/locations.dart';
+import 'package:threads_sdk/src/media.dart';
+import 'package:threads_sdk/src/oembed.dart';
+import 'package:threads_sdk/src/publishing.dart';
+import 'package:threads_sdk/src/replies.dart';
+import 'package:threads_sdk/src/user.dart';
 
 void main() {
   group('ThreadsClient.publishing', () {

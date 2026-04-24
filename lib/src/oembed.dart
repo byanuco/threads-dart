@@ -1,5 +1,5 @@
-import 'package:threads/src/models/oembed_response.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/models/oembed_response.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class OEmbed {
   OEmbed(this._client);

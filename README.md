@@ -1,7 +1,7 @@
-# threads
+# threads_sdk
 
 [![CI](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml/badge.svg)](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml)
-[![pub.dev](https://img.shields.io/pub/v/threads.svg)](https://pub.dev/packages/threads)
+[![pub.dev](https://img.shields.io/pub/v/threads_sdk.svg)](https://pub.dev/packages/threads_sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A complete Dart SDK for the [Threads API](https://developers.facebook.com/docs/threads). Publish posts, manage replies, retrieve insights, and handle OAuth, all from a single package.
@@ -14,7 +14,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  threads: ^0.1.0
+  threads_sdk: ^0.1.1
 ```
 
 Then run `dart pub get`.
@@ -26,7 +26,7 @@ Then run `dart pub get`.
 The Threads API uses OAuth 2.0. Create an `Auth` instance and redirect your user to the authorization URL:
 
 ```dart
-import 'package:threads/threads.dart';
+import 'package:threads_sdk/threads_sdk.dart';
 
 final auth = Auth(
   appId: 'YOUR_APP_ID',
@@ -133,7 +133,7 @@ Every `ThreadsException` has three fields: `statusCode`, `errorCode`, and `messa
 | `OEmbed` | `client.oembed` | Embed Threads posts in web pages |
 | `Debug` | `client.debug` | Debug token info (useful in development) |
 
-A runnable end-to-end example lives in [`example/threads_example.dart`](example/threads_example.dart).
+A runnable end-to-end example lives in [`example/threads_sdk_example.dart`](example/threads_sdk_example.dart).
 
 ## Contributing
 

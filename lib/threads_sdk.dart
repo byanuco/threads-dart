@@ -1,4 +1,11 @@
-/// A complete Dart SDK for the Threads API.
+/// A Dart SDK for Meta's Threads API.
+///
+/// Publish posts, manage replies, read insights, search locations, and
+/// handle OAuth, all with fully typed models and a sealed exception
+/// hierarchy.
+///
+/// See the README at https://github.com/byanuco/threads-dart for a full
+/// walkthrough and a runnable example.
 library;
 
 // Client
