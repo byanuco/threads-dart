@@ -5,11 +5,17 @@ import 'package:threads_sdk/src/models/media_object.dart';
 import 'package:threads_sdk/src/models/paginated_response.dart';
 import 'package:threads_sdk/src/threads_http_client.dart';
 
+/// Reads on individual media objects and keyword/tag search over posts.
 class Media {
+  /// Creates a [Media] bound to the given authenticated HTTP client.
   Media(this._client);
 
   final ThreadsHttpClient _client;
 
+  /// Fetches a single media object by ID.
+  ///
+  /// [fields] selects which fields to return; defaults to the API's default
+  /// field set when omitted.
   Future<MediaObject> get(String mediaId, {List<String>? fields}) async {
     final queryParams = <String, String>{
       if (fields != null) 'fields': fields.join(','),
@@ -21,6 +27,10 @@ class Media {
     return MediaObject.fromJson(response);
   }
 
+  /// Searches public posts by keyword or tag.
+  ///
+  /// Requires the keyword search permission on the app. See the Threads
+  /// documentation for the precise semantics of each filter parameter.
   Future<PaginatedResponse<MediaObject>> keywordSearch({
     required String query,
     SearchType? searchType,

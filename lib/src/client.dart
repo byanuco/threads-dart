@@ -11,7 +11,18 @@ import 'package:threads_sdk/src/replies.dart';
 import 'package:threads_sdk/src/threads_http_client.dart';
 import 'package:threads_sdk/src/user.dart';
 
+/// Entry point to the Threads API.
+///
+/// Groups the SDK's feature areas ([publishing], [media], [replies], [user],
+/// [insights], [locations], [oembed], [debug]) behind a single authenticated
+/// client. Pass app credentials (`appId`, `appSecret`, `redirectUri`) if you
+/// also need [auth] for the OAuth flow.
 class ThreadsClient {
+  /// Creates a client authenticated with [accessToken].
+  ///
+  /// [httpClient] lets callers inject a custom `http.Client` (useful for
+  /// tests or proxy setups). `appId`, `appSecret`, and `redirectUri` are only
+  /// required if you intend to use [auth]; omit them for plain API calls.
   ThreadsClient({
     required String accessToken,
     http.Client? httpClient,
@@ -43,6 +54,10 @@ class ThreadsClient {
   Replies? _replies;
   User? _user;
 
+  /// OAuth helpers for obtaining and refreshing access tokens.
+  ///
+  /// Throws [ValidationException] if app credentials were not supplied to the
+  /// constructor.
   Auth get auth {
     if (_appId == null || _appSecret == null || _redirectUri == null) {
       throw ValidationException(
@@ -62,19 +77,27 @@ class ThreadsClient {
     );
   }
 
+  /// Token introspection endpoints used for debugging auth state.
   Debug get debug => _debug ??= Debug(_httpClient);
 
+  /// Media and user insights (views, likes, follower demographics, etc.).
   Insights get insights => _insights ??= Insights(_httpClient);
 
+  /// Location lookup and search used when tagging posts with a place.
   Locations get locations => _locations ??= Locations(_httpClient);
 
+  /// Reads on individual media objects and keyword/tag search over posts.
   Media get media => _media ??= Media(_httpClient);
 
+  /// Fetches oEmbed markup for rendering a Threads post inside another page.
   OEmbed get oembed => _oembed ??= OEmbed(_httpClient);
 
+  /// Creates, publishes, reposts, and deletes Threads posts.
   Publishing get publishing => _publishing ??= Publishing(_httpClient);
 
+  /// Reads and moderates replies on posts you own.
   Replies get replies => _replies ??= Replies(_httpClient);
 
+  /// Profile, feed, replies, mentions, and publishing quota for a user.
   User get user => _user ??= User(_httpClient);
 }

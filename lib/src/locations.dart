@@ -1,11 +1,14 @@
 import 'package:threads_sdk/src/models/location.dart';
 import 'package:threads_sdk/src/threads_http_client.dart';
 
+/// Location lookup and search for tagging posts with a place.
 class Locations {
+  /// Creates a [Locations] bound to the given authenticated HTTP client.
   Locations(this._client);
 
   final ThreadsHttpClient _client;
 
+  /// Fetches a single location by ID.
   Future<Location> get(String locationId, {List<String>? fields}) async {
     final queryParams = <String, String>{'fields': ?fields?.join(',')};
     final response = await _client.get(
@@ -15,6 +18,8 @@ class Locations {
     return Location.fromJson(response);
   }
 
+  /// Searches locations by free-text [query], by [latitude]/[longitude], or
+  /// both.
   Future<List<Location>> search({
     String? query,
     double? latitude,
