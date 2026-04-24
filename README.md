@@ -1,6 +1,7 @@
 # threads_sdk
 
 [![Dart](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml/badge.svg)](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/byanuco/threads-dart/branch/main/graph/badge.svg)](https://codecov.io/gh/byanuco/threads-dart)
 [![pub.dev](https://img.shields.io/pub/v/threads_sdk.svg)](https://pub.dev/packages/threads_sdk)
 [![pub points](https://img.shields.io/pub/points/threads_sdk)](https://pub.dev/packages/threads_sdk/score)
 
