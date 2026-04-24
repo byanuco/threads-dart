@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [0.1.1] - 2026-04-23
+## 0.1.1
 
 Initial release.
 

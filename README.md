@@ -1,8 +1,8 @@
 # threads_sdk
 
-[![CI](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml/badge.svg)](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml)
+[![Dart](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml/badge.svg)](https://github.com/byanuco/threads-dart/actions/workflows/ci.yml)
 [![pub.dev](https://img.shields.io/pub/v/threads_sdk.svg)](https://pub.dev/packages/threads_sdk)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![pub points](https://img.shields.io/pub/points/threads_sdk)](https://pub.dev/packages/threads_sdk/score)
 
 A complete Dart SDK for the [Threads API](https://developers.facebook.com/docs/threads). Publish posts, manage replies, retrieve insights, and handle OAuth, all from a single package.
 
@@ -140,7 +140,3 @@ A runnable end-to-end example lives in [`example/threads_sdk_example.dart`](exam
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR expectations.
 
 Test coverage is held at 90% or higher, enforced in CI. See the [Coverage section in CONTRIBUTING.md](CONTRIBUTING.md#coverage) for how to run the check locally.
-
-## License
-
-MIT. See [LICENSE](LICENSE).
