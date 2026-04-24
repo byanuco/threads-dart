@@ -2,11 +2,14 @@ import 'package:threads_sdk/src/models/media_object.dart';
 import 'package:threads_sdk/src/models/paginated_response.dart';
 import 'package:threads_sdk/src/threads_http_client.dart';
 
+/// Reads and moderates replies on posts you own.
 class Replies {
+  /// Creates a [Replies] bound to the given authenticated HTTP client.
   Replies(this._client);
 
   final ThreadsHttpClient _client;
 
+  /// Direct replies to [mediaId].
   Future<PaginatedResponse<MediaObject>> getReplies(
     String mediaId, {
     List<String>? fields,
@@ -30,6 +33,8 @@ class Replies {
     );
   }
 
+  /// The full threaded conversation rooted at [mediaId], including nested
+  /// replies.
   Future<PaginatedResponse<MediaObject>> getConversation(
     String mediaId, {
     List<String>? fields,
@@ -53,6 +58,7 @@ class Replies {
     );
   }
 
+  /// Replies to [mediaId] waiting on manual approval.
   Future<PaginatedResponse<MediaObject>> getPendingReplies(
     String mediaId, {
     List<String>? fields,
@@ -76,6 +82,7 @@ class Replies {
     );
   }
 
+  /// Hides or unhides a reply. [hide] true hides it, false restores it.
   Future<void> manageReply(String replyId, {required bool hide}) async {
     await _client.post(
       '/$replyId/manage_reply',
@@ -83,6 +90,8 @@ class Replies {
     );
   }
 
+  /// Approves or rejects a pending reply. [approve] true publishes it, false
+  /// discards it.
   Future<void> managePendingReply(
     String replyId, {
     required bool approve,
