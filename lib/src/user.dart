@@ -1,7 +1,7 @@
-import 'package:threads/src/models/media_object.dart';
-import 'package:threads/src/models/paginated_response.dart';
-import 'package:threads/src/models/user_profile.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/models/media_object.dart';
+import 'package:threads_sdk/src/models/paginated_response.dart';
+import 'package:threads_sdk/src/models/user_profile.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class User {
   User(this._client);

@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:threads/src/exceptions/threads_exception.dart';
+import 'package:threads_sdk/src/exceptions/threads_exception.dart';
 
 void main() {
   group('ThreadsException subtypes carry fields', () {

@@ -1,9 +1,9 @@
-import 'package:threads/src/enums/media_type.dart' as enums;
-import 'package:threads/src/enums/search_mode.dart';
-import 'package:threads/src/enums/search_type.dart';
-import 'package:threads/src/models/media_object.dart';
-import 'package:threads/src/models/paginated_response.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/enums/media_type.dart' as enums;
+import 'package:threads_sdk/src/enums/search_mode.dart';
+import 'package:threads_sdk/src/enums/search_type.dart';
+import 'package:threads_sdk/src/models/media_object.dart';
+import 'package:threads_sdk/src/models/paginated_response.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class Media {
   Media(this._client);

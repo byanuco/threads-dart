@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
-import 'package:threads/src/enums/insight_metric.dart';
-import 'package:threads/src/insights.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/enums/insight_metric.dart';
+import 'package:threads_sdk/src/insights.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 http.Response _jsonResponse(Object body, {int statusCode = 200}) {
   return http.Response(

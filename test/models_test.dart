@@ -1,13 +1,13 @@
 import 'package:test/test.dart';
-import 'package:threads/src/enums/media_type.dart';
-import 'package:threads/src/enums/token_type.dart';
-import 'package:threads/src/models/insight.dart';
-import 'package:threads/src/models/location.dart';
-import 'package:threads/src/models/media_object.dart';
-import 'package:threads/src/models/oembed_response.dart';
-import 'package:threads/src/models/paginated_response.dart';
-import 'package:threads/src/models/token.dart';
-import 'package:threads/src/models/user_profile.dart';
+import 'package:threads_sdk/src/enums/media_type.dart';
+import 'package:threads_sdk/src/enums/token_type.dart';
+import 'package:threads_sdk/src/models/insight.dart';
+import 'package:threads_sdk/src/models/location.dart';
+import 'package:threads_sdk/src/models/media_object.dart';
+import 'package:threads_sdk/src/models/oembed_response.dart';
+import 'package:threads_sdk/src/models/paginated_response.dart';
+import 'package:threads_sdk/src/models/token.dart';
+import 'package:threads_sdk/src/models/user_profile.dart';
 
 void main() {
   group('Token', () {

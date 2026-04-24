@@ -1,6 +1,6 @@
-import 'package:threads/src/models/media_object.dart';
-import 'package:threads/src/models/paginated_response.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/models/media_object.dart';
+import 'package:threads_sdk/src/models/paginated_response.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class Replies {
   Replies(this._client);

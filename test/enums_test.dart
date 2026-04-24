@@ -1,12 +1,12 @@
 import 'package:test/test.dart';
-import 'package:threads/src/enums/media_type.dart';
-import 'package:threads/src/enums/token_type.dart';
-import 'package:threads/src/enums/reply_control.dart';
-import 'package:threads/src/enums/search_type.dart';
-import 'package:threads/src/enums/search_mode.dart';
-import 'package:threads/src/enums/insight_metric.dart';
-import 'package:threads/src/enums/container_status.dart';
-import 'package:threads/src/enums/scope.dart';
+import 'package:threads_sdk/src/enums/media_type.dart';
+import 'package:threads_sdk/src/enums/token_type.dart';
+import 'package:threads_sdk/src/enums/reply_control.dart';
+import 'package:threads_sdk/src/enums/search_type.dart';
+import 'package:threads_sdk/src/enums/search_mode.dart';
+import 'package:threads_sdk/src/enums/insight_metric.dart';
+import 'package:threads_sdk/src/enums/container_status.dart';
+import 'package:threads_sdk/src/enums/scope.dart';
 
 void main() {
   group('MediaType', () {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:threads/src/exceptions/threads_exception.dart';
+import 'package:threads_sdk/src/exceptions/threads_exception.dart';
 
 class ThreadsHttpClient {
   ThreadsHttpClient({required this.accessToken, http.Client? httpClient})

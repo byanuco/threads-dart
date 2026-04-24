@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
-import 'package:threads/src/auth.dart';
-import 'package:threads/src/enums/scope.dart';
-import 'package:threads/src/exceptions/threads_exception.dart';
-import 'package:threads/src/models/token.dart';
+import 'package:threads_sdk/src/auth.dart';
+import 'package:threads_sdk/src/enums/scope.dart';
+import 'package:threads_sdk/src/exceptions/threads_exception.dart';
+import 'package:threads_sdk/src/models/token.dart';
 
 http.Response _tokenResponse({int statusCode = 200}) {
   return http.Response(

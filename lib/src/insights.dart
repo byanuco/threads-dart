@@ -1,6 +1,6 @@
-import 'package:threads/src/enums/insight_metric.dart';
-import 'package:threads/src/models/insight.dart';
-import 'package:threads/src/threads_http_client.dart';
+import 'package:threads_sdk/src/enums/insight_metric.dart';
+import 'package:threads_sdk/src/models/insight.dart';
+import 'package:threads_sdk/src/threads_http_client.dart';
 
 class Insights {
   Insights(this._client);

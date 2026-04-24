@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
-import 'package:threads/src/enums/token_type.dart';
-import 'package:threads/src/exceptions/threads_exception.dart';
-import 'package:threads/src/models/token.dart';
+import 'package:threads_sdk/src/enums/token_type.dart';
+import 'package:threads_sdk/src/exceptions/threads_exception.dart';
+import 'package:threads_sdk/src/models/token.dart';
 
 void main() {
   group('Token.toString safety', () {
