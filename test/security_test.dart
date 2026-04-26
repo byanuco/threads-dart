@@ -9,14 +9,14 @@ void main() {
 
     setUp(() {
       token = Token(
-        accessToken: 'super-secret-token-abc123',
+        accessToken: 'example-token-aaaaaaaa',
         tokenType: TokenType.bearer,
         expiresIn: 3600,
       );
     });
 
     test('does not contain the actual access token value', () {
-      expect(token.toString(), isNot(contains('super-secret-token-abc123')));
+      expect(token.toString(), isNot(contains('example-token-aaaaaaaa')));
     });
 
     test('contains useful debug info (tokenType and expiresIn)', () {
