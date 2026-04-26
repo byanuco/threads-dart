@@ -141,3 +141,7 @@ A runnable end-to-end example lives in [`example/threads_sdk_example.dart`](exam
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR expectations.
 
 Test coverage is held at 90% or higher, enforced in CI. See the [Coverage section in CONTRIBUTING.md](CONTRIBUTING.md#coverage) for how to run the check locally.
+
+## Security
+
+If you think you've found a security issue, please report it privately rather than as a public issue. See [SECURITY.md](SECURITY.md) for the disclosure policy and how to get in touch. Cheers!
