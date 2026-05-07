@@ -9,6 +9,8 @@ A complete Dart SDK for the [Threads API](https://developers.facebook.com/docs/t
 
 > **Important.** This is a community-maintained package and is not affiliated with or endorsed by Meta or the Threads team. "Threads" is a trademark of Meta Platforms, Inc., mentioned here only so you know which API this package talks to.
 
+If you want to say thank you, star us on GitHub and like us on pub.dev ⭐💙
+
 ## Installation
 
 Add to your `pubspec.yaml`:
