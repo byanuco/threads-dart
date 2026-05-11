@@ -13,29 +13,67 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      # Paths whose changes require the full Dart pipeline (format, analyze,
+      # tests + coverage, publish dry-run). Anything outside these globs is
+      # treated as config-only and skips the pipeline.
+      CODE_PATHS_REGEX: '^(lib/|test/|tool/|example/|doc/|pubspec\.ya?ml$|pubspec\.lock$|analysis_options\.yaml$|README\.md$|CHANGELOG\.md$|LICENSE$)'
+
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Detect code changes
+        id: changes
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags origin "${{ github.base_ref }}"
+            range="origin/${{ github.base_ref }}...HEAD"
+          else
+            range="${{ github.event.before }}...${{ github.sha }}"
+          fi
+          if ! git rev-parse --verify "${range%%.*}" >/dev/null 2>&1; then
+            # Base ref missing (force push, first push, etc.) - run everything.
+            echo "code=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          changed=$(git diff --name-only "$range")
+          printf 'Changed files:\n%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -qE "$CODE_PATHS_REGEX"; then
+            echo "code=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "code=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - uses: dart-lang/setup-dart@v1
+        if: steps.changes.outputs.code == 'true'
         with:
           sdk: stable
 
       - name: Install dependencies
+        if: steps.changes.outputs.code == 'true'
         run: dart pub get
 
       - name: Check formatting
+        if: steps.changes.outputs.code == 'true'
         run: dart format --output=none --set-exit-if-changed .
 
       - name: Analyze
+        if: steps.changes.outputs.code == 'true'
         run: dart analyze --fatal-infos
 
       - name: Run tests with coverage
+        if: steps.changes.outputs.code == 'true'
         run: dart run coverage:test_with_coverage
 
       - name: Check coverage threshold
+        if: steps.changes.outputs.code == 'true'
         run: dart run tool/check_coverage.dart --min-coverage 90
 
       - name: Upload coverage to Codecov
+        if: steps.changes.outputs.code == 'true'
         uses: codecov/codecov-action@v6
         with:
           files: ./coverage/lcov.info
@@ -43,4 +81,5 @@ jobs:
           fail_ci_if_error: true
 
       - name: Publish dry run
+        if: steps.changes.outputs.code == 'true'
         run: dart pub publish --dry-run
