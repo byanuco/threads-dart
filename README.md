@@ -147,3 +147,5 @@ Test coverage is held at 90% or higher, enforced in CI. See the [Coverage sectio
 ## Security
 
 If you think you've found a security issue, please report it privately rather than as a public issue. See [SECURITY.md](SECURITY.md) for the disclosure policy and how to get in touch. Cheers!
+
+<!-- ci-check: simulated README-only change to verify the Dart pipeline still runs for README-only PRs, per #32. Safe to remove once verified. -->
