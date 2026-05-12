@@ -8,6 +8,8 @@
 /// walkthrough and a runnable example.
 library;
 
+// ci-check: simulated lib/ change to verify the Dart pipeline runs for lib-only PRs, per #32. Safe to remove once verified.
+
 // Client
 export 'src/client.dart';
 export 'src/auth.dart';
